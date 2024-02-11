@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 
-
 namespace IdnesSeleniumTests.Setup
 {
     public class MethodsInTests
@@ -55,7 +54,22 @@ namespace IdnesSeleniumTests.Setup
             }
             catch (NoSuchElementException)
             {
-                return false; //Element not 
+                return false; //Element not
+            }
+        }
+
+        public void AssertIfElementIsVisible_ByCss(string CssSelector)
+        {
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(10));
+                wait.Until(ExpectedConditions.ElementToBeClickable(By.CssSelector(CssSelector)));
+                IWebElement element = webDriver.FindElement(By.CssSelector(CssSelector));
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(element.Displayed);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Element is visible" + ex.Message);
             }
         }
 

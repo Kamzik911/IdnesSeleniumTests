@@ -15,6 +15,10 @@ namespace IdnesSeleniumTests.Setup
             {
                 webDriver = new EdgeDriver();
             }
+            else if (browser == "Firefox")
+            {
+                webDriver = new FirefoxDriver();
+            }
             else
             {
                 webDriver = new ChromeDriver();
