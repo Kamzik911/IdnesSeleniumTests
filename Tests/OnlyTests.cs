@@ -1,17 +1,30 @@
 ﻿namespace IdnesSeleniumTests.Tests
 {
-    public class OnlyTests : UserLoginTests
+    [TestClass]
+    public class OnlyTests : TestMethods
     {
-        [TestMethod("LoginSuccess")]
+        [TestMethod("Success login")]
         public void UserLogin_Pass()
         {
             UserLoginSuccess();
         }
 
-        [TestMethod("InputWrongEmail")]
-        public void ImputWrongEmail_Pass()
+        [TestMethod("Success logout")]
+        public void UserLogout_Pass()
         {
-            EmptyEmail();
+            UserLogoutSuccess();
         }
+
+        [TestMethod("Input empty email")]
+        public void InputBlankEmailAddress_Pass()
+        {
+            InputBlankEmail();
+        }
+        
+        [TestMethod("Input empty password")]
+        public void InputBlankPassword_Pass()
+        {
+            InputBlankPassword();
+        }       
     }
 }
