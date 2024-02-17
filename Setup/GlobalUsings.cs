@@ -7,4 +7,5 @@ global using System.Diagnostics;
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
 global using OpenQA.Selenium.Support.UI;
 global using SeleniumExtras.WaitHelpers;
+global using TechTalk.SpecFlow;
 global using NUnit.Framework;

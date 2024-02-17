@@ -2,7 +2,7 @@
 {
     public class WorkWithElements
     {
-        IWebDriver webDriver = new WebDriverSetup("Chrome").GetBrowser();        
+        private IWebDriver webDriver = new WebDriverSetup("Chrome").GetBrowser();        
 
         [SetUp]
         public void SetupTest()

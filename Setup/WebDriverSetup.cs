@@ -1,5 +1,4 @@
-﻿
-namespace IdnesSeleniumTests.Setup
+﻿namespace IdnesSeleniumTests.Setup
 {
     public class WebDriverSetup
     {
