@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace IdnesSeleniumTests.Setup
+﻿namespace IdnesSeleniumTests.Setup
 {
     public class WorkWithElements
     {
@@ -23,6 +21,7 @@ namespace IdnesSeleniumTests.Setup
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementToBeClickable(By.Id(IdSelector)));
         }
+
         public void WaitForElement_ByLinkText(string LinkTextSelector)
         {
             WebDriverWait wait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(10));
@@ -39,6 +38,7 @@ namespace IdnesSeleniumTests.Setup
             WaitForClickableElement_ById(IdSelector);
             webDriver.FindElement(By.Id(IdSelector)).Click();
         }
+
         public void ClickOnElement_ByCss(string CssSelector)
         {
             WaitForClickableElement_ByCss(CssSelector);
@@ -50,61 +50,61 @@ namespace IdnesSeleniumTests.Setup
             WaitForClickableElement_ByCss(CssSelector);
             webDriver.FindElement(By.CssSelector(CssSelector)).SendKeys(inputText);
         }
+
         public void InputTextToElement_ByLinkText(string LinkTextSelector, string inputText)
         {
             WaitForElement_ByLinkText(LinkTextSelector);
             webDriver.FindElement(By.LinkText(LinkTextSelector)).SendKeys(inputText);
         }
 
-        public bool CheckVisibleElement_ByCss(string CssSelector)
+        public void MoveMouseToElement_ByCss(string CssSelector)
+        {
+            WaitForClickableElement_ByCss(CssSelector);
+            IWebElement WebElement = webDriver.FindElement(By.CssSelector(CssSelector));
+            Actions MouseAction = new Actions(webDriver);
+            MouseAction.MoveToElement(WebElement).Perform();
+        }
+
+        public void CheckVisibleElement_ByCss(string CssSelector)
         {
             try
             {
                 WaitForClickableElement_ByCss(CssSelector);
-                IWebElement element = webDriver.FindElement(By.CssSelector(CssSelector));
-                return element.Displayed;
+                IWebElement webElement = webDriver.FindElement(By.CssSelector(CssSelector));
+                if (!webElement.Displayed)
+                {
+                    Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("Element is not visible");
+                }
             }
             catch (NoSuchElementException)
             {
-                return false; //Element not present
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("Element not visible");
             }
         }
 
-        public bool CheckVisibleElement_ByLinkText(string LinkTextSelector)
+        public void CheckVisibleElement_ByLinkText(string LinkTextSelector)
         {
             try
             {
                 WaitForElement_ByLinkText(LinkTextSelector);
-                IWebElement element = webDriver.FindElement(By.LinkText(LinkTextSelector));
-                return element.Displayed;
+                IWebElement webElement = webDriver.FindElement(By.LinkText(LinkTextSelector));
+                if (!webElement.Displayed)
+                    {
+                    Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("Element is not visible");
+                    }
             }
             catch (NoSuchElementException)
             {
-                return false; //Element not present
+                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("Element not present");
             }
-        }
-
-        public void AssertIfElementIsVisible_ByCss(string CssSelector)
-        {
-            try
-            {
-                WaitForClickableElement_ByCss(CssSelector);
-                IWebElement element = webDriver.FindElement(By.CssSelector(CssSelector));
-                Microsoft.VisualStudio.TestTools.UnitTesting.Assert.IsTrue(element.Displayed);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Element is visible" + ex.Message);
-            }
-        }
+        }       
 
         public void ClickOnElementIfPresent_ByCss(string CssSelector)
         {
             try
             {
                 WaitForClickableElement_ByCss(CssSelector);
-                IWebElement element = webDriver.FindElement(By.CssSelector(CssSelector));
-                element.Click();
+                webDriver.FindElement(By.CssSelector(CssSelector)).Click();                
             }
             catch (Exception ex)
             {

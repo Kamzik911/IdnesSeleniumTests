@@ -1,7 +1,7 @@
 ﻿namespace IdnesSeleniumTests.Tests
 {
     [TestClass]
-    public class OnlyTests : TestMethods
+    public class LoginLogoutCookiesTests : TestMethods
     {
         [TestMethod("Success login")]
         public void UserLogin_Pass()

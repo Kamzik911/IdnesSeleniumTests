@@ -16,10 +16,7 @@ namespace IdnesSeleniumTests.Tests
             ClickOnElementIfPresent_ByCss("button[id='didomi-notice-learn-more-button']");
 
             //Zamítnout vše
-            ClickOnElementIfPresent_ByCss("button[id='didomi-radio-option-disagree-to-all']");
-
-            //Potvrdit moje volby
-            ClickOnElementIfPresent_ByCss("button[class='didomi-components-button didomi-button didomi-components-button--color didomi-button-highlight highlight-button']");
+            ClickOnElementIfPresent_ByCss("button[class='didomi-components-button didomi-button didomi-button-standard standard-button']");
         }
 
         public void UserLoginSuccess()
@@ -68,7 +65,7 @@ namespace IdnesSeleniumTests.Tests
             InputTextToElement_ByCss("input[name='email']", "");
             ClickOnElement_ById("fLogin");
 
-            AssertIfElementIsVisible_ByCss("[class='error']");            
+            CheckVisibleElement_ByCss("[class='error']");            
         }        
 
         public void InputBlankPassword()
@@ -89,6 +86,50 @@ namespace IdnesSeleniumTests.Tests
             ClickOnElement_ById("fLoginPass");
 
             CheckVisibleElement_ByCss(".error");
+        }
+
+        public void GoToZpravodajstviSite()
+        {
+            GotoPage(IdnesLoginPage);
+
+            DenyAllCookies();
+
+            ClickOnElementIfPresent_ByCss("a[score-id='zpravodaj'][score-place='1']");
+
+            CheckVisibleElement_ByCss("a[title='Zpravodajství']");
+        }
+
+        public void GoToKrajeSite()
+        {
+            GotoPage(IdnesLoginPage);
+
+            DenyAllCookies();
+
+            ClickOnElementIfPresent_ByCss("a[score-id='kraje'][score-place='3']");
+
+            CheckVisibleElement_ByLinkText("Zvolte kraj");
+        }
+
+        public void GoToSportSite()
+        {
+            GotoPage(IdnesLoginPage);
+
+            DenyAllCookies();
+
+            ClickOnElementIfPresent_ByCss("a[score-id='sport'][score-place='4']");
+
+            CheckVisibleElement_ByCss("a[score-id='sport'][title='Sport']");
+        }
+
+        public void PortalMenuIsClickable()
+        {
+            GotoPage(IdnesLoginPage);
+
+            DenyAllCookies();
+
+            ClickOnElement_ByCss("[id='portalmenu-link'][class='icon-menu']");
+
+            CheckVisibleElement_ByCss("[id='portalmenu-link'][class='icon-menu active']");
         }
     }
 }
